@@ -9,7 +9,7 @@ terraform {
   required_version = ">= 1.2"
 }
 
-provider "aws"  {
+provider "aws" {
   region = "ca-central-1"
 }
 
@@ -47,9 +47,11 @@ resource "aws_db_instance" "db_instance" {
   engine               = "mysql"
   engine_version       = "8.0"
   instance_class       = "db.t3.micro"
-  name                 = "mydb"
+
+  db_name              = "mydb"
   username             = "admin"
   password             = "password1234"
+
   parameter_group_name = "default.mysql8.0"
   skip_final_snapshot  = true
 

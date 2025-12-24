@@ -9,7 +9,7 @@ terraform {
   required_version = ">= 1.2"
 }
 
-provider "aws" {
+provider "aws"  {
   region = "ca-central-1"
 }
 
@@ -42,7 +42,7 @@ resource "aws_s3_bucket" "bucket_test_terraform_123456" {
 }
 
 
-resource "aws_rds_instance" "db_instance" {
+resource "aws_db_instance" "db_instance" {
   allocated_storage    = 20
   engine               = "mysql"
   engine_version       = "8.0"

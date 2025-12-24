@@ -40,3 +40,22 @@ resource "aws_s3_bucket" "bucket_test_terraform_123456" {
     Environment = "Dev"
   }
 }
+
+
+resource "aws_rds_instance" "db_instance" {
+  allocated_storage    = 20
+  engine               = "mysql"
+  engine_version       = "8.0"
+  instance_class       = "db.t3.micro"
+  name                 = "mydb"
+  username             = "admin"
+  password             = "password1234"
+  parameter_group_name = "default.mysql8.0"
+  skip_final_snapshot  = true
+
+  tags = {
+    Name = "mydb-instance"
+  }
+}
+
+

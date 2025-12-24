@@ -32,11 +32,11 @@ resource "aws_vpc" "vpc_toronto_test" {
   }
 }
 
-resource "aws_s3_bucket" "bucket_test_terraform_123456" {
-  bucket = "bucket-test-terraform-123456"
+resource "aws_s3_bucket" "bucket_test_terraform" {
+  bucket = "bucket-test-terraform-ismail-2025-01"
 
   tags = {
-    Name        = "bucket_test_terraform_123456"
+    Name        = "bucket_test_terraform"
     Environment = "Dev"
   }
 }

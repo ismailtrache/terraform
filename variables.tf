@@ -69,7 +69,7 @@ variable "flask_app_module" {
 }
 
 variable "public_key" {
-  type    = string
+  type = string
 }
 
 variable "private_key_path" {

@@ -33,9 +33,14 @@ variable "ssh_ingress_cidr" {
   default = "0.0.0.0/0"
 }
 
+variable "public_key_path" {
+  type    = string
+  default = ".secrets/ec2_key.pub"
+}
+
 variable "private_key_path" {
   type    = string
-  default = "ec2_key.pem"
+  default = ".secrets/ec2_key"
 }
 
 variable "root_volume_size" {

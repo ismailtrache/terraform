@@ -106,21 +106,12 @@ resource "aws_security_group" "web" {
   }
 }
 
-resource "tls_private_key" "ssh" {
-  algorithm = "RSA"
-  rsa_bits  = 4096
-}
 
 resource "aws_key_pair" "deployer" {
   key_name   = "${var.name}-key"
-  public_key = tls_private_key.ssh.public_key_openssh
+  public_key = file(var.public_key_path)
 }
 
-resource "local_file" "private_key" {
-  content         = tls_private_key.ssh.private_key_pem
-  filename        = var.private_key_path
-  file_permission = "0400"
-}
 
 resource "aws_instance" "web" {
   ami                    = data.aws_ami.ubuntu.id

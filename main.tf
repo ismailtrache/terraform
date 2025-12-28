@@ -128,10 +128,10 @@ resource "aws_security_group" "web" {
   }
 
   ingress {
-    description = "HTTP from ALB"
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
+    description     = "HTTP from ALB"
+    from_port       = 80
+    to_port         = 80
+    protocol        = "tcp"
     security_groups = [aws_security_group.alb.id]
   }
 
@@ -219,8 +219,8 @@ data "aws_iam_policy_document" "ec2_s3_access" {
   }
 
   statement {
-    sid     = "WriteUploadsBackups"
-    effect  = "Allow"
+    sid    = "WriteUploadsBackups"
+    effect = "Allow"
     actions = [
       "s3:PutObject",
       "s3:AbortMultipartUpload",
@@ -406,7 +406,8 @@ resource "aws_launch_template" "web" {
               /usr/local/bin/flask_app_bootstrap.sh
               systemctl enable --now flask_app.path
               systemctl enable --now flask_app.service
-EOF)
+EOF
+  )
 
   tag_specifications {
     resource_type = "instance"

@@ -406,7 +406,7 @@ resource "aws_launch_template" "web" {
               /usr/local/bin/flask_app_bootstrap.sh
               systemctl enable --now flask_app.path
               systemctl enable --now flask_app.service
-              EOF)
+EOF)
 
   tag_specifications {
     resource_type = "instance"

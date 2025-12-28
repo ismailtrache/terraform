@@ -4,8 +4,10 @@
 *.tfstate.backup
 .crash.log
 *.exe
+tfplan
+*.pem
+.secrets/
 
 # OS
 .DS_Store
 Thumbs.db
-

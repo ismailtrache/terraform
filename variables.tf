@@ -33,9 +33,8 @@ variable "ssh_ingress_cidr" {
   default = "0.0.0.0/0"
 }
 
-variable "public_key_path" {
+variable "public_key" {
   type    = string
-  default = ".secrets/ec2_key.pub"
 }
 
 variable "private_key_path" {

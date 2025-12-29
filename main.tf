@@ -114,33 +114,10 @@ resource "aws_s3_bucket" "uploads" {
 resource "aws_s3_bucket_public_access_block" "uploads" {
   bucket = aws_s3_bucket.uploads.id
 
-  block_public_acls       = false
-  block_public_policy     = false
-  ignore_public_acls      = false
-  restrict_public_buckets = false
-}
-
-data "aws_iam_policy_document" "uploads_public" {
-  statement {
-    sid     = "PublicReadUploadsOnly"
-    effect  = "Allow"
-    actions = ["s3:GetObject"]
-    resources = [
-      "${aws_s3_bucket.uploads.arn}/uploads/*",
-    ]
-
-    principals {
-      type        = "*"
-      identifiers = ["*"]
-    }
-  }
-}
-
-resource "aws_s3_bucket_policy" "uploads_public" {
-  bucket = aws_s3_bucket.uploads.id
-  policy = data.aws_iam_policy_document.uploads_public.json
-
-  depends_on = [aws_s3_bucket_public_access_block.uploads]
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
 }
 
 data "aws_iam_policy_document" "ec2_assume_role" {

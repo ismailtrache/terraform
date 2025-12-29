@@ -2,8 +2,8 @@ output "s3_bucket_name" {
   value = aws_s3_bucket.uploads.bucket
 }
 
-output "uploads_public_url" {
-  value = "https://${aws_s3_bucket.uploads.bucket}.s3.${var.aws_region}.amazonaws.com/uploads/"
+output "uploads_s3_uri" {
+  value = "s3://${aws_s3_bucket.uploads.bucket}/uploads/"
 }
 
 output "public_ip" {

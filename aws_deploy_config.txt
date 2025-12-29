@@ -1,0 +1,73 @@
+# AWS deployment config (no secrets stored)
+# General
+AWS_DEFAULT_REGION=us-east-1
+AWS_PROFILE=<optional-local-cli-profile>
+AWS_OUTPUT=json
+
+# Terraform Cloud
+TF_WORKSPACE=<workspace-name>
+TF_BRANCH=main
+TF_AUTO_APPLY=<true|false>
+TF_VAR_PUBLIC_KEY=<set-in-terraform-cloud>
+
+# Network
+VPC_NAME_TAG=flask-ec2-vpc
+VPC_CIDR=10.0.0.0/16
+IGW_NAME_TAG=flask-ec2-igw
+PUBLIC_ROUTE_TABLE_NAME_TAG=flask-ec2-public-rt
+PUBLIC_SUBNET_1_NAME_TAG=flask-ec2-public-subnet
+PUBLIC_SUBNET_1_CIDR=10.0.1.0/24
+PUBLIC_SUBNET_1_AZ=us-east-1a
+
+# Security groups
+WEB_SG_NAME_TAG=flask-ec2-sg
+WEB_SG_SSH_CIDR=0.0.0.0/0
+WEB_SG_HTTP_INBOUND=0.0.0.0/0:80
+WEB_SG_HTTPS_INBOUND=0.0.0.0/0:443
+
+# IAM
+IAM_ROLE_NAME=flask-ec2-ec2-role
+IAM_POLICY_NAME=flask-ec2-s3-access
+IAM_INSTANCE_PROFILE=flask-ec2-instance-profile
+SSM_POLICY_ARN=arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore
+
+# SSM
+SSM_ENABLED=true
+SSM_AGENT_PACKAGE=amazon-ssm-agent
+SSM_CHECK_CMD=sudo systemctl status amazon-ssm-agent
+
+# S3
+S3_BUCKET=ismailtrache-uploads
+S3_APP_PREFIX=app/
+S3_UPLOADS_PREFIX=uploads/
+S3_BACKUPS_PREFIX=backups/
+S3_UPLOADS_PUBLIC=true
+
+# Compute / AMI
+AMI_OWNER=099720109477
+AMI_NAME_FILTER=ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-*
+INSTANCE_TYPE=t3.micro
+ROOT_VOLUME_TYPE=gp3
+ROOT_VOLUME_SIZE_GB=20
+KEY_PAIR_NAME=flask-ec2-key
+PUBLIC_EIP=true
+
+# SSH
+SSH_USER=ubuntu
+SSH_KEY_PATH=.secrets/ec2_key
+
+# App
+APP_MODULE=app:app
+APP_DIR=/var/www/html
+VENV_DIR=/var/www/html/venv
+GUNICORN_BIND=127.0.0.1:8000
+
+# Nginx
+NGINX_SITE=/etc/nginx/sites-available/flask_app
+NGINX_SERVER_NAME=ismailtrache.me www.ismailtrache.me
+NGINX_PROXY_PASS=http://127.0.0.1:8000
+NGINX_HEALTH_PATH=/health
+
+# Deploy (S3 sync example)
+DEPLOY_SYNC_SOURCE=<local-app-folder>
+DEPLOY_SYNC_CMD=aws s3 sync "<local-app-folder>" "s3://ismailtrache-uploads/app/" --delete --exclude ".git/*" --exclude ".vscode/*"
